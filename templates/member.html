@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Information</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" id="home" href="/">Home</a>
+          <a class="nav-item nav-link" id="subject" href="/member">Members Information</a>
+          <a class="nav-item nav-link" id="result" href="/result">Result</a>
+          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+        </div>
+      </div>
+    </nav>
+{% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %} {% if category ==
+    'error' %}
+    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alter-dismissable fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
+<form method="POST">
+  <h1 align="center">JANGID SAMAJ </h1></br>
+  <h3 align="center">Members Information </h3>
+
+  <div class="form-group">
+
+    <label><b>सदस्य नाम :</b></label>  <input class="form-control" id="myname" name="username" placeholder="सदस्य नाम"/>
+  </div>
+    <div class="form-group">
+    <label><b>पिता का नाम : </b></label><input class="form-control" id="fathername" name="username" placeholder="पिता का नाम"/>
+  </div>
+    </div>
+    <div class="form-group">
+    <label><b>पति / पत्नी का नाम : </b></label><input class="form-control" id="spousename" name="username" placeholder="पति / पत्नी का नाम"/>
+  </div>
+    </div>
+    <div class="form-group">
+    <label><b>जन्मतारीख : </b></label><input  type="date" class="form-control" id="dob" name="username" placeholder="जन्मतारीख"/>
+  </div>
+    </div>
+    <div class="form-group">
+    <label><b>मोबाइल नंबर : </b></label><input class="form-control" id="" name="mobnum" placeholder="मोबाइल नंबर"/>
+  </div>
+    </div>
+    <div class="form-group">
+    <label><b>पता : </b></label><input class="form-control" id="address" name="username" placeholder="पता"/>
+  </div>
+    <div class="form-group">
+        <label><b>एरिया : </b></label></br>
+        <input type="radio" id="area1" name="area_name" value="गंगापुर रोड"><label>&nbsp;&nbsp;गंगापुर रोड  </label></br>
+        <input type="radio" id="area2" name="area_name" value="सिडको"><label>&nbsp;&nbsp;सिडको  </label></br>
+        <input type="radio" id="area3" name="area_name" value="पंचवटी"><label>&nbsp;&nbsp;पंचवटी  </label></br>
+        <input type="radio" id="area4" name="area_name" value="इंदिरा नगर"><label>&nbsp;&nbsp;इंदिरा नगर  </label></br>
+        <input type="radio" id="area5" name="area_name" value="नासिक रोड"><label>&nbsp;&nbsp;नासिक रोड  </label></br>
+        <input type="radio" id="area6" name="area_name" value="आड़गांव नाका"><label>&nbsp;&nbsp;आड़गांव नाका</label></br>
+        <input type="radio" id="area7" name="area_name" value="सातपुर"><label>&nbsp;&nbsp;सातपुर  </label></br>
+        <input type="radio" id="area8" name="area_name" value="मनमाड"><label>&nbsp;&nbsp;मनमाड  </label></br>
+        <input type="radio" id="area9" name="area_name" value="चाँदवड"><label>&nbsp;&nbsp;चाँदवड  </label></br>
+        <input type="radio" id="area10" name="area_name" value="येवला"><label>&nbsp;&nbsp;येवला  </label></br>
+        <input type="radio" id="area11" name="area_name" value="पिंपलगांव"><label>&nbsp;&nbsp;पिंपलगांव  </label></br>
+        <input type="radio" id="area12" name="area_name" value="मालेगांव"><label>&nbsp;&nbsp;मालेगांव  </label></br>
+        <input type="radio" id="area13" name="area_name" value="मालेगांव"><label>&nbsp;&nbsp;अन्य  </label></br>
+
+  </div>
+    <div class="form-group">
+    <label><b>मूलनिवास : </b></label><input class="form-control" id="homelocation" name="username" placeholder="मूलनिवास"/>
+  </div>
+    <div class="form-group">
+    <label><b>गोत (शासन) : </b></label><input class="form-control" id="sashan" name="username" placeholder="गोत (शासन)"/>
+  </div>
+    <div class="form-group">
+    <label><b>परिवार सदस्य संख्या : </b></label><input class="form-control" id="membercount" name="username" placeholder="परिवार सदस्य संख्या"/>
+  </div>
+    <div class="form-group">
+    <label><b>पुत्र का नाम : </b></label><input class="form-control" id="sonname" name="username" placeholder="पुत्र का नाम"/>
+  </div>
+    <div class="form-group">
+    <label><b>पुत्री का नाम : </b></label><input class="form-control" id="ddaughtername" name="username" placeholder="पुत्री का नाम"/>
+  </div>
+    <div class="form-group">
+    <label><b>व्यवसाय : </b></label><input class="form-control" id="occupation" name="username" placeholder="व्यवसाय"/>
+  </div>
+
+
+  <br />
+  <button type="submit" class="btn btn-primary" >SUBMIT</button>
+</form>
+</body>
+</html>
