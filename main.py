@@ -29,31 +29,7 @@ class Database():
         res = self.cur.fetchall()
         return res
 
-    def user_results(self, username):
-        self.cur.execute(f"select * from result_table where user_name  = '{username}' order by date_of_exam desc")
-        res = self.cur.fetchall()
-        return res
-
-    def list_of_subjects(self):
-        self.cur.execute("select distinct subject_name from question_table")
-        res = self.cur.fetchall()
-        return res
-
-    def list_of_question(self, sub):
-        self.cur.execute(f"select * from question_table where subject_name='{sub}'")
-        res = self.cur.fetchall()
-        return res
-
-    def get_user_result_status(self, username):
-        self.cur.execute(f"select user_name,subject_name,substring(DATE_OF_EXAM,1,10) exam_date,count(user_name) no_of_exam_completed,"
-                         f" count(case when score >= 8 then 'PASS' end) passed_exams, count(case when score < 8 then 'FAIL' end) failed_exams, "
-                         f"(count(case when score >= 8 then 'PASS' end) / count(user_name)) * 100 percentage, avg(score) avg_score "
-                         f"from result_table "
-                         f"where user_name='vinod' "
-                         f"group by user_name,subject_name,substring(DATE_OF_EXAM,1,10) "
-                         f"order by substring(DATE_OF_EXAM,1,10) desc, subject_name")
-        res = self.cur.fetchall()
-        return res
+    
 
     def submit_responses(self, username, sub_name, res1, res2, res3, res4, res5, res6, res7, res8, res9, res10):
         responses = [res1, res2, res3, res4, res5, res6, res7, res8, res9, res10]
@@ -82,41 +58,7 @@ class Database():
         res = self.cur.fetchall()
         return res
 
-    def get_all_subjects(self):
-        res = self.list_of_subjects()
-        return res
 
-    def get_all_questions(self):
-        self.cur.execute(f"select subject_name, question_number, question, answer from question_table order by subject_name,question_number")
-        res = self.cur.fetchall()
-        return res
-
-    def get_all_responses(self):
-        self.cur.execute(f"select * from response_table")
-        res = self.cur.fetchall()
-        return res
-
-    def get_all_answers(self):
-        self.cur.execute(f"select * from answer_table")
-        res = self.cur.fetchall()
-        return res
-
-    def get_all_results(self):
-        self.cur.execute(f"select * from result_table order by date_of_exam desc, user_name")
-        res = self.cur.fetchall()
-        return res
-
-    def get_content_data(self):
-        self.cur.execute(f"select "
-                         f"(select count(*) from user_table) as user_count,"
-                         f"(select count(distinct subject_name) from question_table) as subject_count, "
-                         f"(select count(*) from result_table) as total_exam_conducted, "
-                         f"(select count(*) from result_table where score >= 4) as exam_passed, "
-                         f"(select count(*) from result_table where score < 4) as exam_failed "
-                         f"from dual ")
-        res = self.cur.fetchall()
-        print(res)
-        return res
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -220,23 +162,11 @@ def question_response():
     return redirect("/result")
 
 
-@app.route("/all_questions", methods=['GET','POST'])
-@is_logged_in
-def all_quetions():
-    res = Database().get_all_questions()
-    return render_template("admin.html", question=res)
 
-@app.route("/all_results", methods=['GET','POST'])
-@is_logged_in
-def all_results():
-    res = Database().get_all_results()
-    return render_template("admin.html", result=res)
 
-@app.route("/all_subjects", methods=['GET','POST'])
-@is_logged_in
-def all_subjects():
-    res = Database().get_all_subjects()
-    return render_template("admin.html", subject=res)
+
+
+
 
 @app.route("/all_users", methods=['GET','POST'])
 @is_logged_in
@@ -244,17 +174,7 @@ def all_users():
     res = Database().get_all_users()
     return render_template("admin.html", user=res)
 
-@app.route("/all_responses", methods=['GET','POST'])
-@is_logged_in
-def all_responses():
-    res = Database().get_all_responses()
-    return render_template("admin.html", response=res)
 
-@app.route("/all_answers", methods=['GET','POST'])
-@is_logged_in
-def all_answers():
-    res = Database().get_all_answers()
-    return render_template("admin.html", answer=res)
 
 
 @app.route("/admin", methods=['GET','POST'])
